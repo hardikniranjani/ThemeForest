@@ -1,0 +1,21 @@
+1> dataTable for server side rendring 
+2> thumbimage showes in all products
+3> old images shoud be delete after update new image 
+
+-------------------------------------------
+
+3> shows Nth level category in add product page
+4> At run time input field created
+
+
+-------------------------------------------
+Product:
+    - add edit product page 
+    - update api in backend for edit product
+
+    - add server side pagination in api
+    - add dataTable for serverside pagination in get all products
+
+
+    
+

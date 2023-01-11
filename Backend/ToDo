@@ -1,0 +1,29 @@
+# Make Api
+#     - category 
+#     - author 
+#     - Item(Products)
+
+Admin 
+    - Login and register
+    - user and author
+    - crud all
+
+Author
+    - crud Item
+    - Login and register author
+    - Item Category crud 
+    
+
+/////////////////////////////
+*Remaining
+- Portfolio model and controller
+- Update Middleware and helpers for check role and auth for admin, author and users 
+- Item api crud
+- Access as per role 
+
+/////////////////////////////
+*Done
+-- Author crud
+-- ItemDetails crud all 42
+-- user crud
+-- category crud
