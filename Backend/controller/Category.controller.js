@@ -6,7 +6,7 @@ const auth = require('../middlewares/auth');
 const fs = require('fs');
 const sharp = require('sharp');
 const multer = require("multer");
-const fsExtra = require('fs-Extra');
+const fsExtra = require('fs-extra');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
