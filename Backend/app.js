@@ -15,6 +15,7 @@ const ItemDetailsController = require("./controller/Item/ItemDetails.Controller"
 const AuthorController = require("./controller/Author/Author.controller");
 const AdminController = require("./controller/AdminController");
 
+mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.DB_PATH, {
     useNewUrlParser: true,
