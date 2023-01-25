@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Pagination from "@material-ui/lab/Pagination";
 import AuthorApi from "../../Services/admin.author.services";
 import { useTable } from "react-table";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AuthorTable = (props) => {
     const [tutorials, setTutorials] = useState([]);
@@ -82,10 +82,10 @@ const AuthorTable = (props) => {
         const id = tutorialsRef.current[rowIndex]._id;
 
         AuthorApi.softDeleteAuthor(id).then((response) => {
-                // props.history.push("/tutorials");
-                // console.log("delete", response);
-                window.location.reload();
-            })
+            // props.history.push("/tutorials");
+            // console.log("delete", response);
+            window.location.reload();
+        })
             .catch((e) => {
                 console.log(e);
             });
@@ -125,12 +125,12 @@ const AuthorTable = (props) => {
                     return (
                         <div>
                             <span onClick={() => openTutorial(rowIdx)}>
-                               
-                             
+
+
                             </span>
                             <Link to={`/authors/editauthor/${tutorialsRef.current[rowIdx]._id}`}> <i className="far fa-edit action mr-2">Edit</i></Link>
                             <i className="fas fa-edit"></i>
-                            <span onClick={() => deleteTutorial(rowIdx)} style={{cursor:"pointer"}}>
+                            <span onClick={() => deleteTutorial(rowIdx)} style={{ cursor: "pointer" }}>
                                 <i className="fas fa-trash action">Remove</i>
                             </span>
                         </div>
@@ -197,37 +197,66 @@ const AuthorTable = (props) => {
                         onChange={handlePageChange}
                     />
                 </div>
-
-                <table
-                    className="table table-striped table-bordered"
-                    {...getTableProps()}
-                >
-                    <thead>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps()}>
-                                        {column.render("Header")}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {rows.map((row, i) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map((cell) => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                                        );
-                                    })}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <div className="row">
+                    <div className="col-12 grid-margin">
+                        <div className="card">
+                            <div className="card-body">
+                                <h4 className="card-title">All Authors</h4>
+                                <div className="table-responsive">
+                                    <table
+                                        className="table table-striped table-bordered"
+                                        {...getTableProps()}
+                                    >
+                                        <thead>
+                                            {headerGroups.map((headerGroup) => (
+                                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                                    {headerGroup.headers.map((column) => (
+                                                        <th {...column.getHeaderProps()}>
+                                                            {column.render("Header")}
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            ))}
+                                        </thead>
+                                        <tbody {...getTableBodyProps()}>
+                                            {rows.map((row, i) => {
+                                                prepareRow(row);
+                                                return (
+                                                    <tr {...row.getRowProps()}>
+                                                        {row.cells.map((cell) => {
+                                                            return (
+                                                                <>
+                                                                    {cell.column.Header == 'Status' ?
+                                                                        <>
+                                                                            {cell.value === true ?
+                                                                                <td {...cell.getCellProps()}>
+                                                                                    <label className="badge badge-gradient-success">Active</label>
+                                                                                </td>
+                                                                                :
+                                                                                <>
+                                                                                    <td {...cell.getCellProps()}>
+                                                                                        <label className="badge badge-gradient-danger">Inactive</label>
+                                                                                    </td>
+                                                                                </>}
+                                                                        </>
+                                                                        :
+                                                                        <>
+                                                                            <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                                                        </>
+                                                                    }
+                                                                </>
+                                                            );
+                                                        })}
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* <div className="col-md-8">

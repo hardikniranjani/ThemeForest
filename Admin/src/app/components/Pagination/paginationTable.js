@@ -43,7 +43,7 @@ const PaginationTable = (props) => {
     const params = getRequestParams(searchTitle, page, pageSize);
     // const pageSize = params.pageSize;
     // const pageNumber = params.page;
-    UserApi.getAllUser({ pageSize:params.size, pageNumber:params.page }).then(users => {
+    UserApi.getAllUser({ pageSize: params.size, pageNumber: params.page }).then(users => {
       console.log("users", users)
       // const PageCount =((users.data.TotalUsers)/(users.data.Result.length)).toFixed(0);
       // var count = ((users.data.TotalUsers)/(params.size)).toFixed(0)
@@ -52,7 +52,7 @@ const PaginationTable = (props) => {
       // }else{
       //   var PageCount =((users.data.TotalUsers)/(params.size)).toFixed(0)
       // }
-      var PageCount = Math.ceil(((users.data.TotalUsers)/(params.size)))
+      var PageCount = Math.ceil(((users.data.TotalUsers) / (params.size)))
       setTutorials(users.data.Result);
       setCount(PageCount);
     }).catch(err => console.log("error", err))
@@ -60,8 +60,8 @@ const PaginationTable = (props) => {
     // UserApi.getAllUser({ pageSize: , pageNumber:  }).then((response) => {
     //   const { Result, TotalUsers } = response.data;
 
-      // setTutorials(Result);
-      // setCount(TotalUsers);
+    // setTutorials(Result);
+    // setCount(TotalUsers);
 
     //   console.log("paginate User", response.data);
     // })
@@ -219,37 +219,47 @@ const PaginationTable = (props) => {
             onChange={handlePageChange}
           />
         </div>
-
-        <table
-          className="table table-striped table-bordered"
-          {...getTableProps()}
-        >
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>
-                    {column.render("Header")}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="row">
+          <div className="col-12 grid-margin">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Recent Tickets</h4>
+                <div className="table-responsive">
+                  <table
+                    className="table"
+                    {...getTableProps()}
+                  >
+                    <thead>
+                      {headerGroups.map((headerGroup) => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map((column) => (
+                            <th {...column.getHeaderProps()}>
+                              {column.render("Header")}
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                      {rows.map((row, i) => {
+                        prepareRow(row);
+                        return (
+                          <tr {...row.getRowProps()}>
+                            {row.cells.map((cell) => {
+                              return (
+                                <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* <div className="col-md-8">

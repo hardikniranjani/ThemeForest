@@ -5,7 +5,6 @@ function Users() {
 
   return (
     <>
-      <div>All Users</div>
       <UserTable />
     </>
   )

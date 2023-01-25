@@ -12,7 +12,6 @@ function Authors() {
 
   return (
     <>
-      <div>All Authors</div>
       <AuthorTable />
     </>
   )
