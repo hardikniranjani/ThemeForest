@@ -27,3 +27,13 @@ Author
 -- ItemDetails crud all 42
 -- user crud
 -- category crud
+
+
+
+
+
+/////////////////////////////
+To Do:
+    - Remove Portfolio model 
+    - Added Author model
+    - added badges model

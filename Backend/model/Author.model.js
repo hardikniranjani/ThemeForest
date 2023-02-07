@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
+const AuthorSchema = new mongoose.Schema({
     imagePath: {
         type:String
     },
     image: {
         type:String
     },
-    name:{
+    username:{
         type:String,
         required:true,
     },
-    email:{
+    name:{
         type:String,
         required:true,
     },
@@ -31,11 +31,15 @@ const UserSchema = new mongoose.Schema({
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'PortFolio',
+        ref:'User',
     },
-    portFolio:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'PortFolio',
+    followers:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Author',
+    },
+    following:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Author',
     },
     isActive:{
         type:Boolean,
@@ -43,6 +47,13 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-const user = mongoose.model('User', UserSchema);
+const author = mongoose.model('Author', AuthorSchema);
 
-module.exports = user;
+module.exports = author;
+
+
+
+// portFolio:{
+//     type:mongoose.Schema.Types.ObjectId,
+//     ref:'PortFolio',
+// },

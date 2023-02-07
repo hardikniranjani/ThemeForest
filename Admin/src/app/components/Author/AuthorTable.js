@@ -8,14 +8,14 @@ const AuthorTable = (props) => {
     const [tutorials, setTutorials] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
     const tutorialsRef = useRef();
-
+    tutorialsRef.current = tutorials;
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
     const [pageSize, setPageSize] = useState(3);
 
     const pageSizes = [3, 6, 9];
 
-    tutorialsRef.current = tutorials;
+   
 
     const onChangeSearchTitle = (e) => {
         const searchTitle = e.target.value;
@@ -128,10 +128,14 @@ const AuthorTable = (props) => {
 
 
                             </span>
-                            <Link to={`/authors/editauthor/${tutorialsRef.current[rowIdx]._id}`}> <i className="far fa-edit action mr-2">Edit</i></Link>
+                            <Link to={`/authors/editauthor/${tutorialsRef.current[rowIdx]._id}`}> 
+                            {/* <i className="far fa-edit action mr-2">Edit</i> */}
+                            <i className="mdi mdi-lead-pencil action mr-2">Edit</i>
+                            </Link>
                             <i className="fas fa-edit"></i>
                             <span onClick={() => deleteTutorial(rowIdx)} style={{ cursor: "pointer" }}>
-                                <i className="fas fa-trash action">Remove</i>
+                                {/* <i className="fas fa-trash action">Remove</i> */}
+                                <i className="mdi mdi-delete action">Remove</i>
                             </span>
                         </div>
                     );

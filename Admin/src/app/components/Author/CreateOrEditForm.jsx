@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import AuthorApi from '../../Services/admin.author.services';
 import UserApi from '../../Services/user.services';
 import { useHistory } from 'react-router-dom';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 function CreateOrEditForm({ InisialData }) {
     let navigate = useHistory();
@@ -175,7 +175,7 @@ console.log("userArr",userArr)
                                         </>
                                     }
                                 </select>
-                                <Select options={userArr} />
+                                {/* <Select options={userArr} /> */}
                             </Form.Group>
                             <Form.Group>
                                 <label htmlFor="exampleSelectGender">Gender</label>

@@ -129,11 +129,11 @@ const PaginationTable = (props) => {
                             <span onClick={() => openTutorial(rowIdx)}>
                             </span>
                             <Link to={`/users/edituser/${tutorialsRef.current[rowIdx]._id}`}>
-                                <i className="far fa-edit action mr-2">Edit</i>
+                                <i className="mdi mdi-lead-pencil action mr-2">Edit</i>
                             </Link>
-                            <i className="fas fa-edit"></i>
+                            {/* <i className="fas fa-edit"></i> */}
                             <span onClick={() => deleteTutorial(rowIdx)} style={{ cursor: "pointer" }}>
-                                <i className="fas fa-trash action">Remove</i>
+                                <i className="mdi mdi-delete action">Remove</i>
                             </span>
                         </div>
                     );

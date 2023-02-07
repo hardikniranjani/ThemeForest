@@ -1,8 +1,10 @@
 import React from 'react'
-
+import EditItems from '../../../components/Items/ReviewItem.jsx';
 function Item() {
   return (
-    <div>Specific Item</div>
+    <>
+      <EditItems />
+    </>
   )
 }
 

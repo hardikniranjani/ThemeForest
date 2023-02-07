@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
     image:{
-        type:[String],
+        type:String,
     },
     imagePath:{
-        type:[String],
+        type:String,
     },
     videoPath:{
         type:[String],
@@ -21,27 +21,28 @@ const ItemSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
+    discription:{
+        type:String,
+        required:true,
+    },
     itemDetails:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'ItemDetails'
     },
-    portfolio: {
+    author: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:'PortFolio'
-    },
-    discription:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'ItemDiscription'
+        ref:'Author'
     },
     isApproved: {
-        type:Boolean,
-        default:false
+        type:Number,
+        enum:[0,1,2],
+        default:0
     },
+    // 0 = pending , 1 = approved, 2 = rejected
     isActive: {
         type:Boolean,
         default:true
     }
-
 })
 
 const item = mongoose.model('Item', ItemSchema);
@@ -56,3 +57,7 @@ module.exports = item;
 // Comments:{
 //     type:String,
 // }
+// discription:{
+//     type:mongoose.Schema.Types.ObjectId,
+//     ref:'ItemDiscription'
+// },

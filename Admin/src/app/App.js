@@ -8,6 +8,7 @@ import SettingsPanel from './shared/SettingsPanel';
 import Footer from './shared/Footer';
 import { withTranslation } from "react-i18next";
 import { Offline, Online } from "react-detect-offline";
+import './scroll.css'
 // import AuthRoutes from './Routes/AuthRoutes';
 // import { Route, Switch, Redirect } from 'react-router-dom';
 class App extends Component {

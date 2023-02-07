@@ -1,5 +1,6 @@
 const express = require('express');
 const User_Model = require('../model/User.model');
+const Author_Model = require('../model/Author.model');
 const router = express.Router();
 const auth = require('../middlewares/auth');
 const getToken = require('../helpers/getToken');
@@ -299,9 +300,9 @@ router.put('/remove/:id', async (req, res) => {
 
     const id = req.params.id;
 
-    const user = await User_Model.findOne({ _id: id, isActive: true });
+    const user = await User_Model.findOne({ _id: id, isActive: true, isAuthor: false });
 
-    if (!user) return res.status(404).send({ Message: "User not found" });
+    if (!user) return res.status(404).send({ Message: "User not found or first remove author profile" });
 
     const result = await User_Model.findByIdAndUpdate({ _id: id }, {
         $set: {
@@ -322,9 +323,9 @@ router.delete('/delete/:id', async (req, res) => {
 
     const id = req.params.id;
 
-    const user = await User_Model.findOne({ _id: id });
+    const user = await User_Model.findOne({ _id: id , isAuthor: false});
 
-    if (!user) return res.status(404).send({ Message: "User not found" });
+    if (!user) return res.status(404).send({ Message: "User not found or first remove author profile" });
 
     const result = await User_Model.findByIdAndDelete({ _id: id })
 

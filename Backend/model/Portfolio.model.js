@@ -39,29 +39,13 @@ const PortfolioSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
-    isMilestoneMember:{
-        type:Boolean,
-        default:false
+    badges:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Badge'
     },
-    isElightAuthor:{
-        type:Boolean,
-        default:false
-    },
-    isWeeklyTopSeller:{
-        type:Boolean,
-        default:false
-    },
-    isCopyrightNinja:{
-        type:Boolean,
-        default:false
-    },
-    isTrendSetter:{
-        type:Boolean,
-        default:false
-    },
-    isExclusive_Author:{
-        type:Boolean,
-        default:false
+    items:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref:'Item'
     },
     isActive:{
         type:Boolean,
@@ -76,3 +60,27 @@ const portFolio = mongoose.model('PortFolio', PortfolioSchema);
 module.exports = portFolio;
 
 
+// isMilestoneMember:{
+//     type:Boolean,
+//     default:false
+// },
+// isElightAuthor:{
+//     type:Boolean,
+//     default:false
+// },
+// isWeeklyTopSeller:{
+//     type:Boolean,
+//     default:false
+// },
+// isCopyrightNinja:{
+//     type:Boolean,
+//     default:false
+// },
+// isTrendSetter:{
+//     type:Boolean,
+//     default:false
+// },
+// isExclusive_Author:{
+//     type:Boolean,
+//     default:false
+// },

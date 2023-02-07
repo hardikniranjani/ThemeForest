@@ -14,6 +14,7 @@ const ItemDetailsController = require("./controller/Item/ItemDetails.Controller"
 // const MongoDBpath = "mongodb://localhost/demo_store";
 const AuthorController = require("./controller/Author/Author.controller");
 const AdminController = require("./controller/AdminController");
+const ItemController = require("./controller/Item/Item.Controller");
 
 mongoose.set("strictQuery", false);
 mongoose
@@ -42,6 +43,7 @@ app.use("/file", FilesController);
 app.use("/softwareversion", SoftwarVersionController);
 app.use("/itemver", ItemVersionController);
 app.use("/itemdetails", ItemDetailsController);
+app.use("/item", ItemController);
 
 
 // Author

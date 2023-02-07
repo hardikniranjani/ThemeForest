@@ -1,8 +1,9 @@
 const express = require('express');
-const User_Model = require('../../model/User.model');
+const User_Model = require('../../model/Author.model');
+const MainUser_Model = require('../../model/User.model');
 const router = express.Router();
-const auth = require('../../middlewares/auth');
 const getToken = require('../../helpers/getToken');
+const auth = require('../../middlewares/auth');
 const token = require('../../middlewares/token');
 
 const fs = require('fs');
@@ -57,8 +58,8 @@ router.post('/register', upload.single('image'), async (req, res) => {
         var Image = "";
     }
 
-    const UserData = await User_Model.findOne({ username: data.username, user: data.user });
-    if (UserData) return res.status(500).send({ message: "Username or user is already registered" });
+    const UserData = await User_Model.findOne({ username: data.username});
+    if (UserData) return res.status(500).send({ message: "Username is already registered" });
 
     const hash_password = await bcrypt.hash(data.password, 12);
 
@@ -73,7 +74,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
     const NewUser = await User.save();
 
-    await User_Model.findByIdAndUpdate({ _id: data.user }, {
+    await MainUser_Model.findByIdAndUpdate({ _id: data.user }, {
         $set: {
             isAuthor: true,
         }
@@ -148,11 +149,12 @@ router.post('/login', async function (req, res) {
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Get all Authors --Admin
 
-router.get('/allauthors', async (req, res) => {
+router.get('/all', async (req, res) => {
 
     const pageSize = req.query.pageSize
     const pageNumber = req.query.pageNumber
     const TotalAuthors = await User_Model.countDocuments({ role: "author" });
+    // console.log("TotalAuthors",TotalAuthors)
     const Result = await User_Model.find({ role: "author" }).limit(pageSize).skip(pageSize * pageNumber).populate("user");
 
     if (!Result) {
@@ -184,7 +186,7 @@ router.put('/edit/:id', upload.single('image'), async (req, res) => {
     const id = req.params.id;
 
     const data = req.body;
-    console.log("id", data)
+    // console.log("id", data)
     const Result = await User_Model.findOne({ _id: id, role: "author" });
     if (!Result) return res.status(404).send({ message: "Author not found!" });
 
@@ -225,7 +227,7 @@ router.put('/edit/:id', upload.single('image'), async (req, res) => {
         );
     }
 
-    console.log("UpdateAuthor", UpdateUser)
+    // console.log("UpdateAuthor", UpdateUser)
     if (!UpdateUser)
         return res.status(500).send({
             message: "Author not updated right now! please try again later",

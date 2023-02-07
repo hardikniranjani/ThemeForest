@@ -28,17 +28,6 @@ const UserSchema = new mongoose.Schema({
         enum:['admin', 'user','author'],
         default:'user',
     },
-    username:{
-        type:String,
-    },
-    portFolio:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'PortFolio',
-    },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-    },
     isAuthor:{
         type:Boolean,
         default:false

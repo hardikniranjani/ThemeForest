@@ -10,6 +10,8 @@ const Dashboard = lazy(() => import('../Pages/dashBoard.jsx'));
 const Account = lazy(() => import('../Pages/Account'));
 const UserRouter = lazy(() => import('../Pages/User/userRoute.jsx'));
 const AuthorRouter = lazy(() => import('../Pages/Author/AuthorRoute.jsx'));
+const ItemRouter = lazy(() => import('../Pages/Items/ItemRouter.jsx'));
+const ItemDetaisRouter = lazy(() => import('../Pages/ItemDetails/ItemDetailRouter.jsx'));
 
 class PrivateRoutes extends Component {
   render() {
@@ -25,6 +27,8 @@ class PrivateRoutes extends Component {
           <Route path="/account" component={Account} />
           <Route path="/users" component={UserRouter} />
           <Route path="/authors" component={AuthorRouter} />
+          <Route path="/items" component={ItemRouter} />
+          <Route path="/item-detail" component={ItemDetaisRouter} />
           
           {/* 
           <Route path="/products" component={productRoutes} />
