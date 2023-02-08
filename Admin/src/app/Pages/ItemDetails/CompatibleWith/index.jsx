@@ -66,9 +66,9 @@ function CompatibleWith(props) {
         <Link to={`/item-detail/${URL}/edit/${props.id}`}>
           <GridActionsCellItem icon={<i className="mdi mdi-lead-pencil action mr-2"></i>} label="Edit" />
         </Link>,
-        <span onClick={() => deleteTutorial(props.row.id)}>
-          <GridActionsCellItem icon={<i className="mdi mdi-delete action"></i>} label="Edit" />
-        </span>
+        // <span onClick={() => deleteTutorial(props.row.id)}>
+        //   <GridActionsCellItem icon={<i className="mdi mdi-delete action"></i>} label="Edit" />
+        // </span>
       ]
     },
 

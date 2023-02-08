@@ -14,7 +14,7 @@ function ItemRoute() {
             <Switch>
                 <Route path="/item-detail/software-version/list" component={SoftwareVersion} />
                 <Route path="/item-detail/software-version/add" component={Create} />
-                <Route path="/item-detail/software-version/edit" component={Edit} />
+                <Route path="/item-detail/software-version/edit/:id" component={Edit} />
                 <Redirect
                     exact={true}
                     from="/item-detail/software-version"

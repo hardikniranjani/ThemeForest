@@ -1,8 +1,17 @@
-import React from 'react'
+import React from 'react';
+import Form from '../../../components/Ui/ItemDetailsForm.jsx';
 
 function create() {
   return (
-    <div>create</div>
+    <>
+      <Form
+        API_Title="Browser"
+        API_URL="browser"
+        FormTitle="Browser Form"
+        FieldTitle="Browser Name"
+        URL="compatible-browsers"
+      />
+    </>
   )
 }
 

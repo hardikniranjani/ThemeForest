@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const result = await Includes_Files_Model.find({ _id: id, isActive: true});
+    const result = await Includes_Files_Model.find({ _id: id});
     if (!result) return res.status(404).send({ Message: 'Includes Filess not found' });
 
     return res.status(200).send(result);
@@ -81,7 +81,27 @@ router.put('/edit/:id', async (req, res) => {
     return res.status(200).send(updatedResult);
 
 })
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Active Includes_Files
 
+router.put('/active/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const result = await Includes_Files_Model.findOne({ _id: id, isActive: false});
+    if (!result) return res.status(404).send({ Message: 'Includes Filess not found' });
+
+    let updatedResult = await Includes_Files_Model.findByIdAndUpdate({ _id: id},{
+        $set:{
+            isActive: true,
+        }
+    },{ new: true})
+
+    if(!updatedResult) return res.status(500).send({ Message: "Can't active Includes Files right now" });
+
+    return res.status(200).send({ Message: "Includes Files active successfully" });
+
+})
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
