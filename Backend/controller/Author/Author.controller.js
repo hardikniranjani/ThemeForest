@@ -149,13 +149,13 @@ router.post('/login', async function (req, res) {
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Get all Authors --Admin
 
-router.get('/all', async (req, res) => {
+router.get('/allauthors', async (req, res) => {
 
     const pageSize = req.query.pageSize
     const pageNumber = req.query.pageNumber
-    const TotalAuthors = await User_Model.countDocuments({ role: "author" });
+    const TotalAuthors = await User_Model.countDocuments();
     // console.log("TotalAuthors",TotalAuthors)
-    const Result = await User_Model.find({ role: "author" }).limit(pageSize).skip(pageSize * pageNumber).populate("user");
+    const Result = await User_Model.find().limit(pageSize).skip(pageSize * pageNumber).populate("user");
 
     if (!Result) {
         res.status(404).send({ Message: "Author not found" })
@@ -163,6 +163,7 @@ router.get('/all', async (req, res) => {
     return res.status(200).send({ Result, TotalAuthors })
 
 })
+
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -273,6 +274,28 @@ router.put('/edit/:id', upload.single('image'), async (req, res) => {
     }
     return res.status(200).send(UpdateUser);
 
+})
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Active Author 
+
+router.put('/active/:id', async (req, res) => {
+
+    const id = req.params.id;
+
+    const user = await User_Model.findOne({ _id: id, isActive: false });
+
+    if (!user) return res.status(404).send({ Message: "Author not found" });
+
+    const result = await User_Model.findByIdAndUpdate({ _id: id }, {
+        $set: {
+            isActive: true
+        }
+    }, { new: true })
+
+    if (!result) return res.status(500).send({ Message: "Can't active Author right now!!" });
+    return res.status(200).send({ Message: "Author successfully active" });
 })
 
 

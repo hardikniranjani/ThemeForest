@@ -68,7 +68,7 @@ function ItemDetailsForm({ InitialDate, FormTitle, FieldTitle, URL, API_Title, A
         }
     }
     const HandleRemoveUpdate = async () => {
-        if(InitialDate.status){
+        if (InitialDate.status) {
             const confirmBox = window.confirm(
                 `Are you sure you want to Inactive this ${API_Title}?`
             )
@@ -81,12 +81,12 @@ function ItemDetailsForm({ InitialDate, FormTitle, FieldTitle, URL, API_Title, A
                     alert("Please, try again")
                 })
             }
-        }else{
+        } else {
             const confirmBox = window.confirm(
                 `Are you sure you want to Active this ${API_Title}?`
             )
             if (confirmBox === true) {
-                await axios.put(`${ActiveURL}`,status).then(() => {
+                await axios.put(`${ActiveURL}`, status).then(() => {
                     alert("Active succefully!")
                     window.location.reload(true)
                 }).catch((err) => {
@@ -150,26 +150,26 @@ function ItemDetailsForm({ InitialDate, FormTitle, FieldTitle, URL, API_Title, A
                     </div>
                 </div>
             </div>
-            {InitialDate ? 
-            <div className="col-12 grid-margin stretch-card">
-                <div className="card">
-                    <div className="card-body">
-                    <h4 className="card-title mb-4">Action</h4>
-                        <div className="d-flex justify-content-between">
-                            
-                            {InitialDate.status ?
-                                <button type="button" onClick={() => HandleRemoveUpdate()} className="btn btn-outline-danger btn-fw">Inactive {API_Title}</button>
-                                :
-                                <button type="button" onClick={() => HandleRemoveUpdate()} className="btn btn-outline-success btn-fw">Active {API_Title}</button>
-                                
-                            }
+            {InitialDate ?
+                <div className="col-12 grid-margin stretch-card">
+                    <div className="card">
+                        <div className="card-body">
+                            <h4 className="card-title mb-4">Action</h4>
+                            <div className="d-flex justify-content-between">
+
+                                {InitialDate.status ?
+                                    <button type="button" onClick={() => HandleRemoveUpdate()} className="btn btn-outline-danger btn-fw">Inactive {API_Title}</button>
+                                    :
+                                    <button type="button" onClick={() => HandleRemoveUpdate()} className="btn btn-outline-success btn-fw">Active {API_Title}</button>
+
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            :
-            <>
-            </>
+                :
+                <>
+                </>
             }
 
         </>

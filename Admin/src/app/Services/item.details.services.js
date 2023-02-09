@@ -43,16 +43,16 @@ export default new (class item_details_service {
     return axios.get(`${CompatableBrowserURL}/${id}`)
   }
 
-  editBrowser(id) {
-    return axios.put(`${CompatableBrowserURL}/${id}`)
+  editBrowser({id,data}) {
+    return axios.put(`${CompatableBrowserURL}/${id}`,data)
   }
 
-  addBrowser() {
-    return axios.post(`${CompatableBrowserURL}`)
+  addBrowser(data) {
+    return axios.post(`${CompatableBrowserURL}`,data)
   }
 
-  deleteBrowser() {
-    return axios.delete(`${CompatableBrowserURL}`)
+  deleteBrowser(id) {
+    return axios.delete(`${CompatableBrowserURL}/${id}`)
   }
 
   // ////////////////////////////////////////////////////////////////////////////////////////
@@ -68,14 +68,14 @@ export default new (class item_details_service {
     return axios.get(`${FileURL}/${id}`)
   }
 
-  editFiles(id) {
-    return axios.put(`${FileURL}/${id}`)
+  editFiles({id,data}) {
+    return axios.put(`${FileURL}/${id}`,data)
   }
-  addFiles() {
-    return axios.post(`${FileURL}`)
+  addFiles(data) {
+    return axios.post(`${FileURL}`,data)
   }
-  deleteFiles() {
-    return axios.delete(`${FileURL}`)
+  deleteFiles(id) {
+    return axios.delete(`${FileURL}/${id}`)
   }
 
   // ////////////////////////////////////////////////////////////////////////////////////////
@@ -91,16 +91,16 @@ export default new (class item_details_service {
     return axios.get(`${SoftwareURL}/${id}`)
   }
 
-  editSoftwareVersions(id) {
-    return axios.put(`${SoftwareURL}/${id}`)
+  editSoftwareVersions({id,data}) {
+    return axios.put(`${SoftwareURL}/${id}`,data)
   }
 
-  addSoftwareVersions() {
-    return axios.post(`${SoftwareURL}`)
+  addSoftwareVersions(data) {
+    return axios.post(`${SoftwareURL}`,data)
   }
 
-  deleteSoftwareVersions() {
-    return axios.delete(`${SoftwareURL}`)
+  deleteSoftwareVersions(id) {
+    return axios.delete(`${SoftwareURL}/${id}`)
   }
 
   // ////////////////////////////////////////////////////////////////////////////////////////
@@ -115,16 +115,16 @@ export default new (class item_details_service {
     return axios.get(`${TagURL}/${id}`)
   }
 
-  editTags(id) {
-    return axios.put(`${TagURL}/${id}`)
+  editTags({id,data}) {
+    return axios.put(`${TagURL}/${id}`,data)
   }
 
-  addTags() {
-    return axios.post(`${TagURL}`)
+  addTags(data) {
+    return axios.post(`${TagURL}`,data)
   }
 
-  deleteTags() {
-    return axios.delete(`${TagURL}`)
+  deleteTags(id) {
+    return axios.delete(`${TagURL}/${id}`)
   }
 
   // ////////////////////////////////////////////////////////////////////////////////////////

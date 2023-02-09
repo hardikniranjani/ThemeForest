@@ -6,9 +6,12 @@ import { Link } from 'react-router-dom';
 
 const AuthorTable = (props) => {
     const [tutorials, setTutorials] = useState([]);
+    const [error, setSetError] = useState('');
     const [searchTitle, setSearchTitle] = useState("");
+    
     const tutorialsRef = useRef();
     tutorialsRef.current = tutorials;
+
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(0);
     const [pageSize, setPageSize] = useState(3);
@@ -45,9 +48,10 @@ const AuthorTable = (props) => {
 
         AuthorApi.getAllAuthors({ pageSize: params.size, pageNumber: params.page }).then(authors => {
             var PageCount = Math.ceil(((authors.data.TotalAuthors) / (params.size)))
+            console.log("authors",authors.data)
             setTutorials(authors.data.Result);
             setCount(PageCount);
-        }).catch(err => console.log("error", err))
+        }).catch(err => console.log("error", err.response.data.message))
     };
 
     useEffect(retrieveTutorials, [page, pageSize]);
@@ -124,19 +128,14 @@ const AuthorTable = (props) => {
                     const rowIdx = props.row.id;
                     return (
                         <div>
-                            <span onClick={() => openTutorial(rowIdx)}>
-
-
-                            </span>
                             <Link to={`/authors/editauthor/${tutorialsRef.current[rowIdx]._id}`}> 
-                            {/* <i className="far fa-edit action mr-2">Edit</i> */}
                             <i className="mdi mdi-lead-pencil action mr-2">Edit</i>
                             </Link>
-                            <i className="fas fa-edit"></i>
+                            {/* <i className="fas fa-edit"></i>
                             <span onClick={() => deleteTutorial(rowIdx)} style={{ cursor: "pointer" }}>
-                                {/* <i className="fas fa-trash action">Remove</i> */}
+                                <i className="fas fa-trash action">Remove</i>
                                 <i className="mdi mdi-delete action">Remove</i>
-                            </span>
+                            </span> */}
                         </div>
                     );
                 },

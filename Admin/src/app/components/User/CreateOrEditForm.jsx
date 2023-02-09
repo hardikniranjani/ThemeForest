@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap';
 import UserApi from '../../Services/user.services';
-import {useHistory  } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function CreateOrEditForm({ InisialData }) {
     console.log(InisialData)
-    let navigate = useHistory(); 
+    let navigate = useHistory();
     const [error, setError] = useState('');
     const [data, setData] = useState({
         image: "",
@@ -103,25 +103,30 @@ function CreateOrEditForm({ InisialData }) {
 
     }
 
+    if (InisialData) {
+        var UserTitle = 'Update User';
+    } else {
+        var UserTitle = 'Create User';
+    }
     return (
         <>
             <div className="col-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
-                        <div className="d-inline-flex">
+                        <div className="d-flex justify-content-between">
                             <div>
-                                {InisialData && <h4 className="card-title">Update User</h4>}
-                                {!InisialData && <h4 className="card-title">Create User</h4>}
+                                <h4 className="card-title">{UserTitle}</h4>
                                 <p className="card-description" style={{ color: 'red' }}> {error && error} </p>
                             </div>
-                            {InisialData && <div className="top-0 start-0">
-
-                                {UserHeaderStatus == 'Inactive' ?
-                                    <p className="card-description" style={{ color: 'red' }}> This user is {UserHeaderStatus} </p>
-                                    :
-                                    <p className="card-description" style={{ color: 'green' }}> This user is {UserHeaderStatus} </p>
+                            <div>
+                                {InisialData && <div className="top-0 start-0">
+                                    {UserHeaderStatus == 'Inactive' ?
+                                        <p className="card-description" style={{ color: 'red' }}> This user is {UserHeaderStatus} </p>
+                                        :
+                                        <p className="card-description" style={{ color: 'green' }}> This user is {UserHeaderStatus} </p>
+                                    }</div>
                                 }
-                            </div>}
+                            </div>
                         </div>
                         <form className="forms-sample" onSubmit={(e) => HandleSubmit(e)} >
                             <Form.Group>
@@ -154,14 +159,33 @@ function CreateOrEditForm({ InisialData }) {
                             <button className="btn btn-light">Cancel</button>
                         </form>
                     </div>
-                    {InisialData && (
+                    {/* {InisialData && (
                         <>
                             <button type="submit" className="btn btn-gradient-primary mr-2" onClick={() => HandleUpdateUser()}>{UserStatus} this User</button>
                             <button className="btn btn-light" onClick={() => HandleDeleteUser()}>Delete User</button>
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
+            {InisialData &&
+                <div className="col-12 grid-margin stretch-card">
+                    <div className="card">
+                        <div className="card-body">
+                            <h4 className="card-title mb-4">Action</h4>
+                            <div className="d-flex justify-content-between">
+                                {InisialData.status ?
+                                    <button type="button" onClick={() => HandleUpdateUser()} className="btn btn-outline-danger btn-fw">Inactive this User</button>
+                                    :
+                                    <button type="button" onClick={() => HandleUpdateUser()} className="btn btn-outline-success btn-fw">Active this User</button>
+
+                                }
+                                {/* <button type="submit" className="btn btn-gradient-primary mr-2" onClick={() => HandleUpdateUser()}>{UserStatus} this User</button> */}
+                                {/* <button className="btn btn-light" onClick={() => HandleDeleteUser()}>Delete User</button> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </>
     )
 }

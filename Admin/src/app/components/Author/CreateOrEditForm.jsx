@@ -41,7 +41,6 @@ function CreateOrEditForm({ InisialData }) {
         })
     }, [InisialData])
 
-    console.log("data.user.name", data.user.name)
     const HandleChange = (e) => {
         if (e.target.name === 'image') {
             setData({
@@ -65,15 +64,15 @@ function CreateOrEditForm({ InisialData }) {
                 alert("updated succefully!")
             }).catch((err) => {
                 console.log(err)
-                setError(err.response.data.Message)
+                setError(err.response.data.message)
             })
         } else {
             await AuthorApi.createAuthor(data).then((res) => {
                 console.log("User Data", res);
                 alert("added succefully!")
             }).catch((err) => {
-                console.log(err)
-                setError(err.response.data.Message)
+                console.log("err", err.response.data.message)
+                setError(err.response.data.message)
             })
         }
     }
@@ -117,34 +116,38 @@ function CreateOrEditForm({ InisialData }) {
 
 
     }
-    const [userArr, setuserArry] = useState([{value:"", lable:"", id:""}]);
-    useEffect(()=>{
-        userData.map((user, i) =>{
-            console.log(`user${i}`,{value:user.name, lable:user.name, id:user._id})
-            setuserArry({value:user.name, lable:user.name, id:user._id})
+    const [userArr, setuserArry] = useState([{ value: "", lable: "", id: "" }]);
+    useEffect(() => {
+        userData.map((user, i) => {
+            console.log(`user${i}`, { value: user.name, lable: user.name, id: user._id })
+            setuserArry({ value: user.name, lable: user.name, id: user._id })
         })
-    },[])
+    }, [])
 
-console.log("userArr",userArr)
+    if (InisialData) {
+        var AuthorTitle = 'Update Author';
+    } else {
+        var AuthorTitle = 'Create Author';
+    }
     return (
         <>
             <div className="col-12 grid-margin stretch-card">
                 <div className="card">
                     <div className="card-body">
-                        <div className="d-inline-flex">
-                            {InisialData && <h4 className="card-title">Update Author</h4>}
-                            {!InisialData && <h4 className="card-title">Create Author</h4>}
-                            <p className="card-description" style={{ color: 'red' }}> {error && error} </p>
-                            {/* <p className="card-description"> Basic form elements </p> */}
-                            <div></div>
-                            {InisialData && <div className="top-0 start-0">
-
-                                {AuthorHeaderStatus == 'Inactive' ?
-                                    <p className="card-description" style={{ color: 'red' }}> This author is {AuthorHeaderStatus} </p>
-                                    :
-                                    <p className="card-description" style={{ color: 'green' }}> This author is {AuthorHeaderStatus} </p>
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                <h4 className="card-title">{AuthorTitle}</h4>
+                                <p className="card-description" style={{ color: 'red' }}> {error && error} </p>
+                            </div>
+                            <div>
+                                {InisialData && <div className="top-0 start-0">
+                                    {AuthorHeaderStatus == 'Inactive' ?
+                                        <p className="card-description" style={{ color: 'red' }}> This author is {AuthorHeaderStatus} </p>
+                                        :
+                                        <p className="card-description" style={{ color: 'green' }}> This author is {AuthorHeaderStatus} </p>
+                                    }</div>
                                 }
-                            </div>}
+                            </div>
                         </div>
                         <form className="forms-sample" onSubmit={(e) => HandleSubmit(e)} >
                             <Form.Group>
@@ -171,7 +174,7 @@ console.log("userArr",userArr)
                                             {userData.map((user, i) => (
                                                 <option key={i} value={user._id}>{user.name}</option>
                                             ))}
-                                            
+
                                         </>
                                     }
                                 </select>
@@ -195,14 +198,33 @@ console.log("userArr",userArr)
                             <button className="btn btn-light">Cancel</button>
                         </form>
                     </div>
-                    {InisialData && (
+                    {/* {InisialData && (
                         <>
                             <button type="submit" className="btn btn-gradient-primary mr-2" onClick={() => HandleUpdateUser()}>{AuthorStatus} this Author</button>
                             <button className="btn btn-light" onClick={() => HandleDeleteUser()}>Delete Author</button>
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
+            {InisialData &&
+                <div className="col-12 grid-margin stretch-card">
+                    <div className="card">
+                        <div className="card-body">
+                            <h4 className="card-title mb-4">Action</h4>
+                            <div className="d-flex justify-content-between">
+                                {InisialData.status ?
+                                    <button type="button" onClick={() => HandleUpdateUser()} className="btn btn-outline-danger btn-fw">Inactive this Author</button>
+                                    :
+                                    <button type="button" onClick={() => HandleUpdateUser()} className="btn btn-outline-success btn-fw">Active this Author</button>
+
+                                }
+                                {/* <button type="submit" className="btn btn-gradient-primary mr-2" onClick={() => HandleUpdateUser()}>{UserStatus} this User</button> */}
+                                {/* <button className="btn btn-light" onClick={() => HandleDeleteUser()}>Delete User</button> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </>
     )
 }

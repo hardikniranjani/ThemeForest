@@ -290,6 +290,28 @@ router.put('/edit/:id', upload.single('image'), async (req, res) => {
 
 })
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Active user 
+
+router.put('/active/:id', async (req, res) => {
+
+    const id = req.params.id;
+
+    const user = await User_Model.findOne({ _id: id, isActive: false });
+
+    if (!user) return res.status(404).send({ Message: "User not found or first active author profile" });
+
+    const result = await User_Model.findByIdAndUpdate({ _id: id }, {
+        $set: {
+            isActive: true
+        }
+    }, { new: true })
+
+    if (!result) return res.status(500).send({ Message: "Can't active user right now!!" });
+    return res.status(200).send({ Message: "User successfully active" });
+})
+
 
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

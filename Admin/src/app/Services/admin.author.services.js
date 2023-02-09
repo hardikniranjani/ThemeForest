@@ -24,6 +24,10 @@ export default new(class Admin_Service{
         })
     }
     
+    activeAuthor(id) {
+        return axios.put(`${baseUrl}/author/active/${id}`)
+    }
+
     softDeleteAuthor(id) {
         return axios.put(`${baseUrl}/author/remove/${id}`)
     }
