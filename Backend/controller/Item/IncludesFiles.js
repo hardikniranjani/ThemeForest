@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     if (!data) return res.status(400).send({ Message: 'Please Fillup form' });
 
     const result = await Includes_Files_Model.findOne({ name: data.name });
-    if (result) return res.status(500).send({ Message: 'Includes Files already added' });
+    if (result) return res.status(400).send({ Message: 'Includes Files already added' });
 
     let NewIncludes_files = new Includes_Files_Model({
         ...data
@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/edit/:id', async (req, res) => {
     const id = req.params.id;
-    const data = await req.body;
+    const data = req.body;
 
     const result = await Includes_Files_Model.find({ _id: id });
     if (!result) return res.status(404).send({ Message: 'Includes Filess not found' });
