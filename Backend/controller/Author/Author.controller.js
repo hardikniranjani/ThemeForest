@@ -58,7 +58,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
         var Image = "";
     }
 
-    const UserData = await User_Model.findOne({ username: data.username});
+    const UserData = await User_Model.findOne({ username: data.username, user:data.user});
     if (UserData) return res.status(500).send({ message: "Username is already registered" });
 
     const hash_password = await bcrypt.hash(data.password, 12);
